@@ -13,8 +13,8 @@
 			def5: 52,
 			def6: "text",
 			def7: ["arr1", "arr2"]
-		};
-		var e = this;
+		},
+		e = this;
 
 		// Define Element of ExpiresCookie
 		e.elem = typeof elem === "string" ? document.querySelectorAll(elem) : elem;
@@ -29,6 +29,8 @@
 
 			return expiresArray;
 		}
+
+		e.elem = e.elem.length === undefined ? e.elem : e.elem[0];
 
 		// Assign options to params
 		params = params || {};

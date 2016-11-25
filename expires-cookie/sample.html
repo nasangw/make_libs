@@ -7,8 +7,35 @@
 </head>
 <body>
 <h1>expires-cookie.js 테스트</h1>
+<div id="contents1" class="contents">
+	<p>컨텐츠컨텐츠컨텐츠컨텐츠1</p>
+	<p>컨텐츠컨텐츠컨텐츠컨텐츠1</p>
+	<p>컨텐츠컨텐츠컨텐츠컨텐츠1</p>
+	<p>컨텐츠컨텐츠컨텐츠컨텐츠1</p>
+	<p>컨텐츠컨텐츠컨텐츠컨텐츠1</p>
+</div>
+
+<div id="contents2" class="contents">
+	<p>컨텐츠컨텐츠컨텐츠컨텐츠2</p>
+	<p>컨텐츠컨텐츠컨텐츠컨텐츠2</p>
+	<p>컨텐츠컨텐츠컨텐츠컨텐츠2</p>
+	<p>컨텐츠컨텐츠컨텐츠컨텐츠2</p>
+	<p>컨텐츠컨텐츠컨텐츠컨텐츠2</p>
+</div>
+
+<div>
+	<a href="#contents1" id="expTest1" class="exp-test" data-expires="3">테스트1</a>
+	<button type="button" class="exp-test" data-expires="5">테스트2</button>
+	<input type="checkbox" name="exp" value="true" class="exp-test" data-expires="9">
+</div>
 
 <script src="../js/libs/js-cookie/src/js.cookie.js"></script>
 <script src="js/expires-cookie.js"></script>
+<script>
+var expireTest1 = new ExpiresCookie("#expTest1", {
+//var expireTest1 = new ExpiresCookie(".exp-test", {
+	target: ".contents"
+});
+</script>
 </body>
 </html>
