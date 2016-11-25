@@ -48,9 +48,11 @@
 <script src="../js/libs/js-cookie/src/js.cookie.js"></script>
 <script src="js/expires-cookie.js"></script>
 <script>
-var expireTest1 = new ExpiresCookie("#expTest1", {
+//var expireTest1 = new ExpiresCookie("#expTest1", {
 //var expireTest1 = new ExpiresCookie(".exp-test", {
-	target: ".contents"
+var expireTest1 = new ExpiresCookie(null, {
+	target: ".contents",
+	duration: "2d"
 });
 </script>
 </body>
