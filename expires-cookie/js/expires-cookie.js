@@ -17,21 +17,21 @@
 		},
 		e = this;
 
-		// Define Element of ExpiresCookie
-		e.elem = typeof elem === "string" ? document.querySelectorAll(elem) : elem;
-		if (e.elem.length === 0) {
-			return;
-		}
-		if (e.elem.length > 1) {
-			var expiresArray = [];
-			e.elem.forEach(function(element) {
-				expiresArray.push(new ExpiresCookie(element, params));
-			});
+		if(elem !== null) {
+			// Define Element of ExpiresCookie
+			e.elem = typeof elem === "string" ? document.querySelectorAll(elem) : elem;
 
-			return expiresArray;
-		}
+			if (e.elem.length > 1) {
+				var expiresArray = [];
+				e.elem.forEach(function(element) {
+					expiresArray.push(new ExpiresCookie(element, params));
+				});
 
-		e.elem = e.elem.length === undefined ? e.elem : e.elem[0];
+				return expiresArray;
+			}
+
+			e.elem = e.elem.length === undefined ? e.elem : e.elem[0];
+		}
 
 		// Assign options to params
 		params = params || {};
@@ -49,10 +49,12 @@
 		}
 
 		// set duration
-		params.duration = e.elem.getAttribute("data-expires") || params.duration;
+		params.duration = e.elem ? (e.elem.getAttribute("data-expires") || params.duration) : params.duration;
 
-		// Save instance in elem HTML Element and in data
-		e.elem.expires = e;
+		if(elem !== null) {
+			// Save instance in elem HTML Element and in data
+			e.elem.expires = e;
+		}
 	}
 
 	// Define prototype
