@@ -1,0 +1,14 @@
+{
+  "name": "make_libs",
+  "homepage": "https://github.com/nasangw/make_libs",
+  "authors": [
+    "nasangw"
+  ],
+  "description": "install bower packages for make_libs",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "js-cookie": "^2.1.3"
+  }
+}
