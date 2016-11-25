@@ -6,6 +6,7 @@
 
 		var defaults = {
 			target: undefined,
+			duration: '1d',
 			def1: true,
 			def2: false,
 			def3: null,
@@ -47,7 +48,8 @@
 			}
 		}
 
-		e.dataExpires = !e.elem.getAttribute("data-expires") ? 1 : e.elem.getAttribute("data-expires");
+		// set duration
+		params.duration = e.elem.getAttribute("data-expires") || params.duration;
 
 		// Save instance in elem HTML Element and in data
 		e.elem.expires = e;

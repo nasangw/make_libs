@@ -23,11 +23,27 @@
 	<p>컨텐츠컨텐츠컨텐츠컨텐츠2</p>
 </div>
 
-<div>
-	<a href="#contents1" id="expTest1" class="exp-test" data-expires="3">테스트1</a>
-	<button type="button" class="exp-test" data-expires="5">테스트2</button>
-	<input type="checkbox" name="exp" value="true" class="exp-test" data-expires="9">
-</div>
+<form name="fff" method="get">
+	<div>
+		<a href="#contents1" id="expTest1" class="exp-test" data-expires="3">테스트1</a>
+	</div>
+
+	<div>
+		<button type="button" class="exp-test" data-expires="today">테스트2</button>
+	</div>
+
+	<div>
+		<input type="checkbox" id="expTest3" name="exp" value="true" class="exp-test" data-expires="9">
+		<label for="expTest3">테스트3</label>
+	</div>
+
+	<div>
+		<input type="radio" id="expTest4a" name="exp4" value="true" class="exp-test" data-expires="1" checked="checked">
+		<label for="expTest4a">테스트4-a</label>
+		<input type="radio" id="expTest4b" name="exp4" value="true" class="exp-test" data-expires="7">
+		<label for="expTest4b">테스트4-b</label>
+	</div>
+</form>
 
 <script src="../js/libs/js-cookie/src/js.cookie.js"></script>
 <script src="js/expires-cookie.js"></script>
