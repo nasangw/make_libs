@@ -1,59 +1,107 @@
 <!doctype html>
-<html lang="kr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Document</title>
-</head>
-<body>
-<h1>expires-cookie.js 테스트</h1>
-<div id="contents1" class="contents">
-	<p>컨텐츠컨텐츠컨텐츠컨텐츠1</p>
-	<p>컨텐츠컨텐츠컨텐츠컨텐츠1</p>
-	<p>컨텐츠컨텐츠컨텐츠컨텐츠1</p>
-	<p>컨텐츠컨텐츠컨텐츠컨텐츠1</p>
-	<p>컨텐츠컨텐츠컨텐츠컨텐츠1</p>
-</div>
-
-<div id="contents2" class="contents">
-	<p>컨텐츠컨텐츠컨텐츠컨텐츠2</p>
-	<p>컨텐츠컨텐츠컨텐츠컨텐츠2</p>
-	<p>컨텐츠컨텐츠컨텐츠컨텐츠2</p>
-	<p>컨텐츠컨텐츠컨텐츠컨텐츠2</p>
-	<p>컨텐츠컨텐츠컨텐츠컨텐츠2</p>
-</div>
-
-<form name="fff" method="get">
-	<div>
-		<a href="#contents1" id="expTest1" class="exp-test" data-expires="3">테스트1</a>
-	</div>
-
-	<div>
-		<button type="button" class="exp-test" data-expires="today">테스트2</button>
-	</div>
-
-	<div>
-		<input type="checkbox" id="expTest3" name="exp" value="true" class="exp-test" data-expires="9">
-		<label for="expTest3">테스트3</label>
-	</div>
-
-	<div>
-		<input type="radio" id="expTest4a" name="exp4" value="true" class="exp-test" data-expires="1" checked="checked">
-		<label for="expTest4a">테스트4-a</label>
-		<input type="radio" id="expTest4b" name="exp4" value="true" class="exp-test" data-expires="7">
-		<label for="expTest4b">테스트4-b</label>
-	</div>
-</form>
-
+<title>sample - expires-cookie.js</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <script src="../js/libs/js-cookie/src/js.cookie.js"></script>
 <script src="js/expires-cookie.js"></script>
+</head>
+<body style="display: none;">
+
+<div id="container" style="display: none;">
+	<h1 class="title">#container</h1>
+
+	<div id="contents1" class="section target-class" style="display: none;">
+		<h2 class="title">#contents1.section.target-class</h2>
+		<p>Duration: 3h(3 Hours)</p>
+		<p>Target: ".target-class"</p>
+
+		<div>
+			<a href="##" id="triggerContents1" class="exp-test" data-expires-duration="3h" data-expires-target="body .target-class">Button1. Hide in set duration</a>
+		</div>
+	</div>
+
+	<div id="contents2" class="section target-class" style="display: none;">
+		<h2 class="title">#contents2.section.target-class</h2>
+		<p>Duration: 7w(7 Weeks)</p>
+		<p>Target: "#container"</p>
+
+		<div>
+			<button type="button" id="triggerContents2" class="exp-test" data-expires-duration="7w" data-expires-target="#container">Button2. Hide in set duration</button>
+		</div>
+	</div>
+
+	<div id="contents3" class="section" style="display: none;">
+		<h2 class="title">#contents3.section</h2>
+		<p>Duration: today(Until today)</p>
+		<p>Target: "#contents3"</p>
+
+		<div>
+			<a href="##" id="triggerContents3" class="exp-test" data-expires-duration="today" data-expires-target="#contents3">Button3. Hide in set duration</a>
+		</div>
+	</div>
+
+	<div id="contents4" class="section target-class" style="display: none;">
+		<h2 class="title">#contents4.section.target-class</h2>
+		<p>Duration: 5m(5 Months)</p>
+		<p>Target: "body"</p>
+
+		<div>
+			<button type="button" id="noAttribute">No Attribute<br>(Double Click)</button>
+		</div>
+		<script>
+		// Body(No attributes)
+		showExpiresContents("body");
+		var button = document.querySelector("#noAttribute");
+		button.addEventListener("dblclick", function() {
+			var test5 = new ExpiresCookie(null, {
+				target: "body",
+				duration: "5m"
+			});
+		}, false);
+		</script>
+	</div>
+</div>
+
+<div class="section">
+	<button type="button" onclick="Cookies.remove('body .target-class'); window.location.reload(true);">Remove Cookies<br>for Button1</button>
+	<button type="button" onclick="Cookies.remove('#container'); window.location.reload(true);">Remove Cookies<br>for Button2</button>
+	<button type="button" onclick="Cookies.remove('#contents3'); window.location.reload(true);">Remove Cookies<br>for Button3</button>
+	<button type="button" onclick="Cookies.remove('footer'); window.location.reload(true);">Remove Cookies<br>for Checkbox1</button>
+</div>
+
+<footer class="section" style="display: none;">
+	<h2 class="title">footer.section</h2>
+	<p>Duration: 2y(2 Years)</p>
+	<p>Target: "footer"</p>
+	<div>
+		<input type="checkbox" id="triggerFooter" name="exp" value="true" class="exp-test" data-expires-duration="2y" data-expires-target="footer">
+		<label for="triggerFooter">Checkbox1. Hide in set duration</label>
+	</div>
+</footer>
+
 <script>
-//var expireTest1 = new ExpiresCookie("#expTest1", {
-//var expireTest1 = new ExpiresCookie(".exp-test", {
-var expireTest1 = new ExpiresCookie(null, {
-	target: ".contents",
-	duration: "2d"
-});
+// .target-class
+showExpiresContents("body .target-class");
+var test1 = new ExpiresCookie("#triggerContents1");
+
+
+// #container
+showExpiresContents("#container");
+var test2 = new ExpiresCookie("#triggerContents2");
+
+
+// #contents3
+showExpiresContents("#contents3");
+var test3 = new ExpiresCookie("#triggerContents3");
+
+
+// Footer
+showExpiresContents("footer");
+var test4 = new ExpiresCookie("#triggerFooter");
 </script>
+
 </body>
 </html>
